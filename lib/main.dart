@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:polybot/pages/chat_page.dart';
+import 'package:polybot/pages/login_page.dart';
 import 'package:polybot/themes/app_theme.dart';
 
 void main() {
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       initialRoute: "/",
       debugShowCheckedModeBanner: false,
       routes: {
-        "/": (context) => ChatPage(),
+        "/": (context) => LoginPage(),
       },
     );
   }

@@ -30,31 +30,6 @@ class _ChatPageState extends State<ChatPage> {
     });
   }
 
-  //   @override
-  // Widget build(BuildContext context) {
-  //   return Padding(
-  //     padding: const EdgeInsets.all(8.0),
-  //     child: Row(
-  //       children: [
-  //         Expanded(
-  //           child: TextField(
-  //             controller: _textController,
-  //             decoration: const InputDecoration(
-  //               hintText: 'Enter Text ...',
-  //               border: OutlineInputBorder(),
-  //             ),
-  //           ),
-  //         ),
-  //         IconButton(icon: const Icon(Icons.language), onPressed: () {}),
-  //         IconButton(icon: const Icon(Icons.attach_file), onPressed: () {}),
-  //         IconButton(icon: const Icon(Icons.image), onPressed: () {}),
-  //         IconButton(icon: const Icon(Icons.add), onPressed: () {}),
-  //         IconButton(icon: const Icon(Icons.arrow_upward), onPressed: () {}),
-  //       ],
-  //     ),
-  //   );
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,17 +74,6 @@ class _ChatPageState extends State<ChatPage> {
               ),
             ),
           ),
-          const SizedBox(height: 8),
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              Expanded(child: Text("Hello")),
-              FloatingActionButton(
-                onPressed: () => _handleSubmitted(_textController.text),
-                child: const Icon(Icons.send),
-              ),
-            ],
-          )
         ],
       ),
     );
