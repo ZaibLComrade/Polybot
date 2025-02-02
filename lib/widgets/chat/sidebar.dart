@@ -12,14 +12,6 @@ class Sidebar extends StatelessWidget {
       child: Column(
         children: [
           DrawerHeader(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  theme.colorScheme.primary,
-                  theme.colorScheme.secondary,
-                ],
-              ),
-            ),
             child: Column(
               children: [
                 CircleAvatar(
@@ -34,14 +26,12 @@ class Sidebar extends StatelessWidget {
                 const SizedBox(height: 12),
                 Text(
                   'John Doe',
-                  style: theme.textTheme.titleLarge?.copyWith(
-                    color: theme.colorScheme.onPrimary,
-                  ),
+                  style: theme.textTheme.titleLarge?.copyWith(),
                 ),
                 Text(
                   'john.doe@example.com',
                   style: theme.textTheme.bodyMedium?.copyWith(
-                    color: theme.colorScheme.onPrimary.withOpacity(0.8),
+                    color: theme.textTheme.bodyMedium?.color?.withValues(alpha: 0.8),
                   ),
                 ),
               ],
@@ -95,7 +85,7 @@ class Sidebar extends StatelessWidget {
             leading: const Icon(Icons.settings),
             title: const Text('Settings'),
             onTap: () {
-              Navigator.pushNamed(context, '/profile');
+              Navigator.pushNamed(context, '/settings');
             },
           ),
         ],
@@ -133,14 +123,10 @@ class Sidebar extends StatelessWidget {
     );
   }
 
-  Widget _buildModelTile(
-    BuildContext context,
-    String title,
-    IconData icon,
-    [bool isSelected = false]
-  ) {
+  Widget _buildModelTile(BuildContext context, String title, IconData icon,
+      [bool isSelected = false]) {
     final theme = Theme.of(context);
-    
+
     return ListTile(
       leading: Icon(
         icon,

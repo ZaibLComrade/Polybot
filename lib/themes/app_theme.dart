@@ -47,7 +47,7 @@ class AppTheme {
   static ThemeData darkTheme = ThemeData(
     useMaterial3: true,
     colorScheme: ColorScheme.fromSeed(
-      seedColor: Colors.blue,
+      seedColor: const Color.fromARGB(255, 243, 75, 33),
       brightness: Brightness.dark,
     ),
     textTheme: GoogleFonts.interTextTheme(ThemeData.dark().textTheme),

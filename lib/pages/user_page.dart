@@ -39,14 +39,17 @@ class UserPage extends StatelessWidget {
                   Text(
                     'John Doe',
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                    ),
+                          color: Theme.of(context).colorScheme.onPrimary,
+                        ),
                   ),
                   Text(
                     'john.doe@example.com',
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: Theme.of(context).colorScheme.onPrimary.withValues(alpha: 0.8),
-                    ),
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onPrimary
+                              .withValues(alpha: 0.8),
+                        ),
                   ),
                   const SizedBox(height: 20),
                 ],
@@ -66,21 +69,28 @@ class UserPage extends StatelessWidget {
                         Icons.edit,
                         'Edit Profile',
                         'Update your personal information',
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushNamed(context, "/profile/edit-profile");
+                        },
                       ),
                       _buildTile(
                         context,
                         Icons.lock,
                         'Change Password',
                         'Update your security credentials',
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushNamed(
+                              context, "/profile/change-password");
+                        },
                       ),
                       _buildTile(
                         context,
                         Icons.notifications,
                         'Notifications',
                         'Manage your notification preferences',
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushNamed(context, "/profile/notification");
+                        },
                       ),
                     ],
                   ),
@@ -94,14 +104,18 @@ class UserPage extends StatelessWidget {
                         Icons.chat_bubble,
                         'Chat History',
                         'View your conversation history',
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushNamed(context, "/history");
+                        },
                       ),
                       _buildTile(
                         context,
                         Icons.model_training,
                         'AI Models',
                         'Manage your preferred AI models',
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushNamed(context, "/models");
+                        },
                       ),
                     ],
                   ),
@@ -148,8 +162,8 @@ class UserPage extends StatelessWidget {
           child: Text(
             title,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
+                  fontWeight: FontWeight.bold,
+                ),
           ),
         ),
         Card(

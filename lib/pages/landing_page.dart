@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:polybot/widgets/common/footer.dart';
 import 'package:polybot/widgets/landing/feature_card.dart';
 import 'package:polybot/widgets/landing/hero_section.dart';
 import 'package:polybot/widgets/landing/testimonial_card.dart';
@@ -90,6 +91,7 @@ class LandingPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 64),
+            const Footer(),
           ],
         ),
       ),

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:polybot/pages/change_password_page.dart';
+import 'package:polybot/pages/edit_profile_page.dart';
+import 'package:polybot/pages/notification_page.dart';
 import 'package:provider/provider.dart';
 import 'package:polybot/pages/chat_page.dart';
 import 'package:polybot/pages/landing_page.dart';
@@ -62,6 +65,12 @@ class MyApp extends StatelessWidget {
                 return const PricingPage();
               case '/profile':
                 return const UserPage();
+              case '/profile/change-password':
+                return const ChangePasswordPage();
+              case '/profile/edit-profile':
+                return const EditProfilePage();
+              case '/profile/notification':
+                return const NotificationsPage();
               case '/models':
                 return const ModelsPage();
               case '/settings':
