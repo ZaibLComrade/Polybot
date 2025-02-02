@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:polybot/models/message.dart';
-import 'package:polybot/widgets/message_bubble.dart';
+import 'package:polybot/widgets/chat/message_bubble.dart';
 
 class ChatMessages extends StatelessWidget {
   final List<Message> messages;

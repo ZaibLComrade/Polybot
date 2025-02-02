@@ -29,10 +29,7 @@ class PricingPage extends StatelessWidget {
                     ),
               ),
               const SizedBox(height: 48),
-              const Wrap(
-                spacing: 24,
-                runSpacing: 24,
-                alignment: WrapAlignment.center,
+              const Row(
                 children: [
                   PriceCard(
                     title: 'Free',

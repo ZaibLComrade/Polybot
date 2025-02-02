@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:polybot/widgets/custom_text_field.dart';
+import 'package:polybot/widgets/common/custom_text_field.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:polybot/models/message.dart';
-import 'package:polybot/widgets/sidebar.dart';
-import 'package:polybot/widgets/modal_info_card.dart';
-import 'package:polybot/widgets/chat_input.dart';
-import 'package:polybot/widgets/chat_messages.dart';
-import 'package:polybot/widgets/chat_app_bar.dart';
+import 'package:polybot/widgets/chat/sidebar.dart';
+import 'package:polybot/widgets/chat/modal_info_card.dart';
+import 'package:polybot/widgets/chat/chat_input.dart';
+import 'package:polybot/widgets/chat/chat_messages.dart';
+import 'package:polybot/widgets/chat/chat_app_bar.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});

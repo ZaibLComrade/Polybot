@@ -26,7 +26,7 @@ class PriceCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -91,10 +91,12 @@ class PriceCard extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () => Navigator.pushNamed(context, '/login'),
               style: ElevatedButton.styleFrom(
-                backgroundColor:
-                    isPro ? Theme.of(context).colorScheme.primary : null,
-                foregroundColor:
-                    isPro ? Theme.of(context).colorScheme.onPrimary : null,
+                backgroundColor: isPro
+                    ? Theme.of(context).colorScheme.primary
+                    : null,
+                foregroundColor: isPro
+                    ? Theme.of(context).colorScheme.onPrimary
+                    : null,
                 padding: const EdgeInsets.symmetric(vertical: 16),
               ),
               child: Text(isPro ? 'Get Started' : 'Choose Plan'),
