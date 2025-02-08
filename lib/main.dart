@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:polybot/pages/settings_pages/change_password_page.dart';
 import 'package:polybot/pages/settings_pages/edit_profile_page.dart';
 import 'package:polybot/pages/settings_pages/notification_page.dart';
+import 'package:polybot/providers/model_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:polybot/pages/chat_pages/chat_page.dart';
 import 'package:polybot/pages/landing_pages/landing_page.dart';
@@ -26,6 +27,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => ChatProvider()),
+        ChangeNotifierProvider(create: (_) => ModelProvider()),
       ],
       child: const MyApp(),
     ),
@@ -45,7 +47,7 @@ class MyApp extends StatelessWidget {
       darkTheme: AppTheme.darkTheme,
       themeMode: themeProvider.themeMode,
       showSemanticsDebugger: false,
-      initialRoute: "/",
+      initialRoute: "/chat",
       debugShowCheckedModeBanner: false,
       onGenerateRoute: (settings) {
         // Add page transitions
