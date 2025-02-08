@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:polybot/widgets/common/responsive_builder.dart';
+import '../widgets/common/responsive_builder.dart';
 
 class PricingPage extends StatelessWidget {
   const PricingPage({super.key});

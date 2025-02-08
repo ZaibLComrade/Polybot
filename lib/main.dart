@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+import 'package:polybot/helper/database_helper.dart';
 import 'package:polybot/pages/change_password_page.dart';
 import 'package:polybot/pages/edit_profile_page.dart';
 import 'package:polybot/pages/notification_page.dart';
@@ -18,14 +20,25 @@ import 'package:polybot/themes/app_theme.dart';
 import 'package:polybot/providers/theme_provider.dart';
 import 'package:polybot/providers/auth_provider.dart';
 import 'package:polybot/providers/chat_provider.dart';
+import 'package:polybot/providers/model_provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize databaseFactory if using sqflite_common_ffi
+  sqfliteFfiInit();
+  databaseFactory = databaseFactoryFfi; // Required for desktop platforms
+
+  // Initialize database
+  final db = await DatabaseHelper().database;
+
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => ChatProvider()),
+        ChangeNotifierProvider(create: (_) => ModelProvider()), // Add ModelProvider
       ],
       child: const MyApp(),
     ),
@@ -38,7 +51,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
-    
+    final authProvider = Provider.of<AuthProvider>(context);
+
+    // Check authentication status when app starts
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      authProvider.checkAuthStatus();
+    });
+
     return MaterialApp(
       title: "Polybot",
       theme: AppTheme.lightTheme,
@@ -48,10 +67,16 @@ class MyApp extends StatelessWidget {
       initialRoute: "/",
       debugShowCheckedModeBanner: false,
       onGenerateRoute: (settings) {
-        // Add page transitions
         return PageRouteBuilder(
           settings: settings,
           pageBuilder: (context, animation, secondaryAnimation) {
+            // Check if user is authenticated for protected routes
+            // if (!authProvider.isAuthenticated &&
+            //     !['/login', '/register', '/', '/pricing']
+            //         .contains(settings.name)) {
+            //   return const LoginPage();
+            // }
+
             switch (settings.name) {
               case '/':
                 return const LandingPage();
@@ -89,7 +114,8 @@ class MyApp extends StatelessWidget {
             const begin = Offset(1.0, 0.0);
             const end = Offset.zero;
             const curve = Curves.easeInOutCubic;
-            var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+            var tween =
+                Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
             var offsetAnimation = animation.drive(tween);
             return SlideTransition(position: offsetAnimation, child: child);
           },

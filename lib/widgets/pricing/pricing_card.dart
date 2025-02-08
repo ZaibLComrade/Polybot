@@ -144,7 +144,7 @@ class PricingCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: isHighlighted
                       ? Theme.of(context).colorScheme.primaryContainer
-                      : Theme.of(context).colorScheme.surfaceVariant,
+                      : Theme.of(context).colorScheme.surfaceContainerHighest,
                   shape: BoxShape.circle,
                 ),
                 child: Icon(

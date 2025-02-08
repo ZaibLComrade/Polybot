@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:polybot/widgets/chat/user_avatar_menu.dart';
 
 class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool isSmallScreen;
   final VoidCallback onMenuPressed;
   final VoidCallback onModelSelect;
-  final VoidCallback onProfilePressed;
 
   const ChatAppBar({
     super.key,
     required this.isSmallScreen,
     required this.onMenuPressed,
     required this.onModelSelect,
-    required this.onProfilePressed,
   });
 
   @override
@@ -33,10 +32,9 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
             onPressed: onModelSelect,
             tooltip: 'Select AI Model',
           ),
-        IconButton(
-          icon: const Icon(Icons.person),
-          onPressed: onProfilePressed,
-          tooltip: 'View Profile',
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8.0),
+          child: UserAvatarMenu(),
         ),
       ],
     );

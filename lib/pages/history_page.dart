@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:polybot/providers/chat_provider.dart';
-import 'package:polybot/widgets/common/skeleton_loader.dart';
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({super.key});

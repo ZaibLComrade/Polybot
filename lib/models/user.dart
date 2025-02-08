@@ -1,80 +1,54 @@
-import 'package:polybot/models/user_preference.dart';
-import 'package:polybot/models/user_subscription.dart';
-
 class User {
-  final String id;
+  final int id;
+  final String username;
   final String email;
-  final String fullName;
-  final String? photoUrl;
-  final String? bio;
-  final UserPreferences preferences;
-  final UserSubscription subscription;
+  final String role;
   final DateTime createdAt;
-  final DateTime? lastLoginAt;
 
   User({
     required this.id,
+    required this.username,
     required this.email,
-    required this.fullName,
-    this.photoUrl,
-    this.bio,
-    required this.preferences,
-    required this.subscription,
+    required this.role,
     required this.createdAt,
-    this.lastLoginAt,
   });
 
   User copyWith({
-    String? id,
+    int? id,
+    String? username,
     String? email,
-    String? fullName,
-    String? photoUrl,
-    String? bio,
-    UserPreferences? preferences,
-    UserSubscription? subscription,
+    String? role,
     DateTime? createdAt,
-    DateTime? lastLoginAt,
   }) {
     return User(
       id: id ?? this.id,
+      username: username ?? this.username,
       email: email ?? this.email,
-      fullName: fullName ?? this.fullName,
-      photoUrl: photoUrl ?? this.photoUrl,
-      bio: bio ?? this.bio,
-      preferences: preferences ?? this.preferences,
-      subscription: subscription ?? this.subscription,
+      role: role ?? this.role,
       createdAt: createdAt ?? this.createdAt,
-      lastLoginAt: lastLoginAt ?? this.lastLoginAt,
     );
   }
 
-  Map<String, dynamic> toJson() {
+  factory User.fromMap(Map<String, dynamic> map) {
+    return User(
+      id: map['id'] as int,
+      username: map['username'] as String,
+      email: map['email'] as String,
+      role: map['role'] as String,
+      createdAt: DateTime.parse(map['created_at']),
+    );
+  }
+
+  Map<String, dynamic> toMap() {
     return {
       'id': id,
+      'username': username,
       'email': email,
-      'fullName': fullName,
-      'photoUrl': photoUrl,
-      'bio': bio,
-      'preferences': preferences.toJson(),
-      'subscription': subscription.toJson(),
-      'createdAt': createdAt.toIso8601String(),
-      'lastLoginAt': lastLoginAt?.toIso8601String(),
+      'role': role,
+      'created_at': createdAt.toIso8601String(),
     };
   }
 
-  factory User.fromJson(Map<String, dynamic> json) {
-    return User(
-      id: json['id'],
-      email: json['email'],
-      fullName: json['fullName'],
-      photoUrl: json['photoUrl'],
-      bio: json['bio'],
-      preferences: UserPreferences.fromJson(json['preferences']),
-      subscription: UserSubscription.fromJson(json['subscription']),
-      createdAt: DateTime.parse(json['createdAt']),
-      lastLoginAt: json['lastLoginAt'] != null
-          ? DateTime.parse(json['lastLoginAt'])
-          : null,
-    );
-  }
+  bool get isAdmin => role == 'admin';
+  bool get isUser => role == 'user';
 }
