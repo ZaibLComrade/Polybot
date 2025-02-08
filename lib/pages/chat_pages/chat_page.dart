@@ -65,11 +65,13 @@ class _ChatPageState extends State<ChatPage> {
           Expanded(
             child: Scaffold(
               appBar: AppBar(
-                title: Text(modelProvider.selectedModel?.name ?? 'Select Model'),
+                title:
+                    Text(modelProvider.selectedModel?.name ?? 'Select Model'),
                 leading: isSmallScreen
                     ? IconButton(
                         icon: const Icon(Icons.menu),
-                        onPressed: () => _scaffoldKey.currentState?.openDrawer(),
+                        onPressed: () =>
+                            _scaffoldKey.currentState?.openDrawer(),
                       )
                     : null,
                 actions: [
@@ -85,7 +87,9 @@ class _ChatPageState extends State<ChatPage> {
                   Expanded(
                     child: Stack(
                       children: [
-                        ChatMessages(messages: chatProvider.messages),
+                        Stack(
+                          children: [ChatMessages(messages: chatProvider.messages)],
+                        ),
                         if (chatProvider.isTyping)
                           const Positioned(
                             left: 16,
