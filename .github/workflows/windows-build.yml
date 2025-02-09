@@ -15,9 +15,14 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Set up Flutter
-        uses: subosito/flutter-action@v2
+        uses: actions/setup-flutter@v2
         with:
           flutter-version: '3.27.3'
+
+      - name: Check Flutter Environment
+        run: |
+          flutter --version
+          flutter doctor -v
 
       - name: Enable Windows Desktop Support
         run: flutter config --enable-windows-desktop
@@ -26,11 +31,15 @@ jobs:
         run: flutter pub get
 
       - name: Build Windows App
-        run: flutter build windows
+        run: flutter build windows --verbose  # Verbose mode for detailed output
+
+      - name: List Build Directory
+        run: |
+          echo "Checking contents of build/windows/runner:"
+          ls -R build/windows/runner  # List the entire build output to locate .exe
 
       - name: Upload Build Artifacts
-        uses: actions/upload-artifact@v4  # Updated to v4
+        uses: actions/upload-artifact@v4
         with:
           name: windows-build
-          path: build/windows/runner/Release
-
+          path: build/windows/runner/**/*.exe  # Flexible path to catch all .exe files
