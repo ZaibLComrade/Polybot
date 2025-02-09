@@ -1,0 +1,18 @@
+<lint-module
+    format="1"
+    dir="/home/zaib/Documents/AiLab/Polybot/Backup/Polybot/android/app"
+    name=":app"
+    type="APP"
+    maven="android:app:"
+    agpVersion="8.2.1"
+    buildFolder="/home/zaib/Documents/AiLab/Polybot/Backup/Polybot/build/app"
+    bootClassPath="/home/zaib/Android/Sdk/platforms/android-35/android.jar:/home/zaib/Android/Sdk/build-tools/34.0.0/core-lambda-stubs.jar"
+    javaSourceLevel="1.8"
+    compileTarget="android-35">
+  <lintOptions
+      abortOnError="true"
+      absolutePaths="true"
+      checkReleaseBuilds="true"
+      explainIssues="true"/>
+  <variant name="release"/>
+</lint-module>

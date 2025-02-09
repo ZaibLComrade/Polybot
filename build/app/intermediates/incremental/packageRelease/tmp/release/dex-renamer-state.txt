@@ -1,0 +1,4 @@
+#Sun Feb 09 14:33:05 BDT 2025
+base.0=/home/zaib/Documents/AiLab/Polybot/Backup/Polybot/build/app/intermediates/dex/release/minifyReleaseWithR8/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
