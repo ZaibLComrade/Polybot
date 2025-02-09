@@ -33,10 +33,10 @@ migrate_working_dir/
 .pub/
 
 # Ignore everything in the build directory
-/build/*
+# /build/*
 
 # But do not ignore the windows folder inside build
-!/build/windows/
+# !/build/windows/
 
 
 # Symbolication related
