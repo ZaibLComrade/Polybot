@@ -85,10 +85,10 @@ class ApiService {
         return const String.fromEnvironment('ANTHROPIC_API_KEY');
       case 'deepseek-llm':
         return const String.fromEnvironment('DEEPSEEK_API_KEY',
-            defaultValue: "sk-f1902595dc654ed78470b63797acac09");
+            defaultValue: "");
       case 'gemini-1.5-flash':
         return const String.fromEnvironment('GEMINI_API_KEY',
-            defaultValue: "AIzaSyAFbt5CxNJVeSDqfPIaeFyBm9jMsN1Zo2A");
+            defaultValue: "");
       default:
         throw Exception('API key not found for $modelName');
     }
