@@ -78,9 +78,7 @@ class ApiService {
   String _getApiKey(String modelName) {
     switch (modelName) {
       case 'gpt-4':
-        return const String.fromEnvironment('OPENAI_API_KEY',
-            defaultValue:
-                "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");
+        return const String.fromEnvironment('OPENAI_API_KEY', defaultValue: "");
       case 'gpt-3.5-turbo':
         return const String.fromEnvironment('OPENAI_API_KEY');
       case 'claude-2':
