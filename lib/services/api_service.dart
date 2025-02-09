@@ -76,22 +76,7 @@ class ApiService {
 
   // Retrieve the API key for each model from environment variables
   String _getApiKey(String modelName) {
-    switch (modelName) {
-      case 'gpt-4':
-        return const String.fromEnvironment('OPENAI_API_KEY', defaultValue: "");
-      case 'gpt-3.5-turbo':
-        return const String.fromEnvironment('OPENAI_API_KEY', defaultValue: "");
-      case 'claude-2':
-        return const String.fromEnvironment('ANTHROPIC_API_KEY',
-            defaultValue: "");
-      case 'deepseek-llm':
-        return const String.fromEnvironment('DEEPSEEK_API_KEY',
-            defaultValue: "");
-      case 'gemini-1.5-flash':
-        return const String.fromEnvironment('GEMINI_API_KEY', defaultValue: "");
-      default:
-        throw Exception('API key not found for $modelName');
-    }
+    return "";
   }
 
   // Build the request body dynamically based on the model
