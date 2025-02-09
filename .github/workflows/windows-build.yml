@@ -3,51 +3,34 @@ name: Build Windows App
 on:
   push:
     branches:
-      - main  # Trigger on push to main branch
-  workflow_dispatch:  # Allow manual trigger from GitHub UI
+      - main
+  workflow_dispatch:
 
 jobs:
   build:
-    runs-on: windows-latest  # Use Windows environment for building
+    runs-on: windows-latest
 
     steps:
-      # Step 1: Checkout your Flutter project code
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Set up Flutter environment
       - name: Set up Flutter
-        uses: actions/setup-flutter@v2
+        uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.27.3'  # Specify the exact Flutter version you're using
+          flutter-version: '3.27.3'
 
-      # Step 3: Verify Flutter setup and environment
-      - name: Check Flutter Environment
-        run: |
-          flutter --version
-          flutter doctor -v
-
-      # Step 4: Enable Windows Desktop support (in case it's not already enabled)
       - name: Enable Windows Desktop Support
         run: flutter config --enable-windows-desktop
 
-      # Step 5: Get Flutter dependencies
       - name: Install dependencies
         run: flutter pub get
 
-      # Step 6: Build the Windows application
       - name: Build Windows App
-        run: flutter build windows --verbose  # Verbose helps debug any build issues
+        run: flutter build windows
 
-      # Step 7: List the contents of the build directory to confirm the .exe is created
-      - name: List Build Directory
-        run: |
-          echo "Listing build/windows/runner directory:"
-          ls -R build/windows/runner
-
-      # Step 8: Upload the built .exe file as an artifact
       - name: Upload Build Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4  # Updated to v4
         with:
           name: windows-build
-          path: build/windows/runner/Release/*.exe  # Adjust this if the .exe is in Debug or another folder
+          path: build/windows/runner/Release
+
