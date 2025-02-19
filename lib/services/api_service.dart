@@ -14,6 +14,8 @@ class ApiService {
         body: jsonEncode(requestData),
       );
 
+      print({response.body});
+
       if (response.statusCode != 200) {
         throw Exception(
             'API request failed: ${response.statusCode} - ${response.body}');
@@ -36,11 +38,10 @@ class ApiService {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $apiKey',
         };
-      case 'claude-2':
+      case 'llama':
         return {
           'Content-Type': 'application/json',
-          'x-api-key': apiKey,
-          'anthropic-version': '2023-06-01',
+          'Authorization': 'Bearer $apiKey',
         };
       case 'deepseek-llm':
         return {
@@ -63,10 +64,11 @@ class ApiService {
       case 'gpt-4':
       case 'gpt-3.5-turbo':
         return 'https://api.openai.com/v1/chat/completions';
-      case 'claude-2':
-        return 'https://api.anthropic.com/v1/messages';
+      case 'llama':
+        return "https://openrouter.ai/api/v1/chat/completions";
       case 'deepseek-llm':
-        return 'https://api.deepseek.com/v1/chat/completions'; // Replace with actual endpoint
+        // return 'https://api.deepseek.com/v1/chat/completions'; // Replace with actual endpoint
+        return "https://openrouter.ai/api/v1/chat/completions";
       case 'gemini-1.5-flash':
         return 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=$apiKey';
       default:
@@ -80,17 +82,22 @@ class ApiService {
       case 'gpt-4':
         return const String.fromEnvironment('OPENAI_API_KEY',
             defaultValue:
-                "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");
+                "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");
       case 'gpt-3.5-turbo':
-        return const String.fromEnvironment('OPENAI_API_KEY');
-      case 'claude-2':
-        return const String.fromEnvironment('ANTHROPIC_API_KEY');
+        return const String.fromEnvironment('OPENAI_API_KEY',
+            defaultValue:
+                "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");
+      case 'llama':
+        return const String.fromEnvironment('META_API_KEY',
+            defaultValue:
+                "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");
       case 'deepseek-llm':
         return const String.fromEnvironment('DEEPSEEK_API_KEY',
-            defaultValue: "sk-f1902595dc654ed78470b63797acac09");
+            defaultValue:
+                "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");
       case 'gemini-1.5-flash':
         return const String.fromEnvironment('GEMINI_API_KEY',
-            defaultValue: "AIzaSyAFbt5CxNJVeSDqfPIaeFyBm9jMsN1Zo2A");
+            defaultValue: "AIzaSyBy_J53dC7GnTe4E17vziDL5wM51IEQeqw");
       default:
         throw Exception('API key not found for $modelName');
     }
@@ -102,35 +109,37 @@ class ApiService {
       case 'gpt-4':
         return {
           'model': 'gpt-4o-mini',
+          'store': true,
           'messages': [
             {'role': 'user', 'content': prompt}
           ],
-          'temperature': 0.7,
+          'max_tokens': 150,
         };
       case 'gpt-3.5-turbo':
         return {
-          'model': 'gpt-3.5-turbo',
+          'model': 'gpt-4o-mini',
           'messages': [
             {'role': 'user', 'content': prompt}
           ],
           'temperature': 0.7,
+          'max_tokens': 150,
         };
-      case 'claude-2':
+      case 'llama':
         return {
-          'model': 'claude-2',
+          'model': 'meta-llama/llama-3.3-70b-instruct:free',
           'messages': [
             {'role': 'user', 'content': prompt}
           ],
-          'max_tokens': 1000,
+          'max_tokens': 150,
         };
       case 'deepseek-llm':
         return {
-          'model': 'deepseek-llm',
+          'model': 'deepseek/deepseek-chat:free',
           'messages': [
             {'role': 'user', 'content': prompt}
           ],
           'temperature': 0.7,
-          'max_tokens': 1000,
+          'max_tokens': 150,
         };
       case 'gemini-1.5-flash':
         return {
@@ -141,7 +150,7 @@ class ApiService {
                 {'text': prompt}
               ]
             }
-          ]
+          ],
         };
       default:
         throw Exception('Unsupported model');
@@ -156,8 +165,8 @@ class ApiService {
       case 'gpt-4':
       case 'gpt-3.5-turbo':
         return data['choices'][0]['message']['content'];
-      case 'claude-2':
-        return data['content'][0]['text'];
+      case 'llama':
+        return data['choices'][0]['message']['content'];
       case 'deepseek-llm':
         return data['choices'][0]['message']
             ['content']; // Assuming a similar structure to OpenAI
